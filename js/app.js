@@ -18,11 +18,10 @@ function getQuote() {
 const city = document.querySelector('.city');
 const country = document.querySelector('.country');
 // Fetching and appending the users location and city
-function getTime() {
+function getUserInfo() {
 	fetch('https://freegeoip.app/json/')
 		.then((response) => response.json())
 		.then((data) => {
-			// console.log(data);
 			city.innerHTML = data.city;
 			country.innerHTML = data.region_name;
 		})
@@ -30,38 +29,34 @@ function getTime() {
 }
 
 // Get the current time
-const date = document.querySelector('.date');
-let today = new Date();
-let hour = today.getHours();
-let minutes = today.getMinutes();
-var time = hour + ':' + minutes;
+function getTime() {
+	const date = document.querySelector('.date');
+	let today = new Date();
+	let hour = today.getHours();
+	let minutes = today.getMinutes();
+	var time = hour + ':' + minutes;
 
-if (minutes < 10) {
-	date.innerHTML = `${hour}:0${minutes}`;
-} else {
-	date.innerText = `${hour}:${minutes}`;
-}
+	console.log(minutes);
 
-date.innerHTML = time;
+	if (minutes < 10) {
+		date.innerHTML = `${hour}:0${minutes}`;
+	} else {
+		date.innerText = `${hour}:${minutes}`;
+	}
 
-const greeting = document.querySelector('.greeting');
-function getGreeting(hour) {
+	date.innerHTML = time;
+
+	const greeting = document.querySelector('.greeting');
+
 	if (hour >= 5 && hour <= 11) {
+		console.log(hour);
 		greeting.innerText = 'Good Morning';
 	} else if (hour >= 12 && hour <= 18) {
 		greeting.innerText = 'Good Afternoon';
 	} else {
 		greeting.innerText = 'Good Evening';
 	}
-}
 
-const icon = document.querySelector('.icon');
-const sun = document.querySelector('.sun');
-const bg = document.querySelector('.bg');
-const details = document.querySelector('.details');
-const dynamicText = document.querySelector('.dynamic-text');
-
-function getIcon(hour) {
 	if (hour >= 5 || hour <= 18) {
 		icon.src = 'assets/desktop/icon-sun.svg';
 		document.body.classList.add('day');
@@ -75,6 +70,12 @@ function getIcon(hour) {
 	}
 }
 
+const icon = document.querySelector('.icon');
+const sun = document.querySelector('.sun');
+const bg = document.querySelector('.bg');
+const details = document.querySelector('.details');
+const dynamicText = document.querySelector('.dynamic-text');
+
 // Get the current time info
 const timeZone = document.querySelector('.timezone');
 const bst = document.querySelector('.bst');
@@ -87,7 +88,6 @@ function getMore() {
 	fetch('http://worldtimeapi.org/api/ip')
 		.then((response) => response.json())
 		.then((data) => {
-			// console.log(data);
 			timeZone.innerHTML = data.timezone;
 			bst.innerHTML = data.abbreviation;
 			dayOfWeek.innerHTML = data.day_of_week;
@@ -121,7 +121,5 @@ function clicker() {
 
 // Run functions
 getTime();
-getTime();
+getUserInfo();
 getMore();
-getIcon();
-getGreeting();
