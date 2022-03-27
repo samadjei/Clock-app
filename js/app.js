@@ -25,7 +25,7 @@ function getUserInfo() {
 			city.innerHTML = data.city;
 			country.innerHTML = data.region_name;
 		})
-		.catch((error) => console.log('Something went wrong'));
+		.catch((error) => console.log('Something went wrong getting quotes'));
 }
 
 // Get the current time
@@ -36,7 +36,7 @@ function getTime() {
 	let minutes = today.getMinutes();
 	var time = hour + ':' + minutes;
 
-	console.log(minutes);
+	console.log(time);
 
 	if (minutes < 10) {
 		date.innerHTML = `${hour}:0${minutes}`;
@@ -58,15 +58,17 @@ function getTime() {
 	}
 
 	if (hour >= 5 || hour <= 18) {
-		icon.src = 'assets/desktop/icon-sun.svg';
-		document.body.classList.add('day');
-		details.classList.add('day');
-		dynamicText.classList.add('day');
-	} else {
 		icon.src = 'assets/desktop/icon-moon.svg';
 		document.body.classList.add('night');
-		details.classList.add('night');
+		details.classList.add('day');
 		dynamicText.classList.add('night');
+		details.classList.add('night');
+	} else {
+		icon.src = 'assets/desktop/icon-sun.svg';
+		document.body.classList.add('day');
+		details.classList.add('night');
+		dynamicText.classList.add('day');
+		details.classList.add('day');
 	}
 }
 
@@ -94,7 +96,7 @@ function getMore() {
 			dayOfYear.innerHTML = data.day_of_year;
 			weekOfNumber.innerHTML = data.week_number;
 		})
-		.catch((error) => console.log('Something went wrong'));
+		.catch((error) => console.log('Something went wrong with the time response'));
 }
 
 const button = document.querySelector('.button');
